@@ -59,7 +59,7 @@ public:
 	virtual	bool hasSyntax() { return true;	}
 private:
 	static MObject _extensionAttribute;
-	static MObject _extensionAttributeDefaultValue;
+	//static MObject _extensionAttributeDefaultValue;
 	static MString _extensionAttributeFullName;
 	static MString _extensionAttributeBriefName;
 	static MNodeClass _extensionAttributeAffectedNodeClass;

@@ -16,7 +16,7 @@ void AssetMetadataMPx::copy(const MPxData& other)
 	if (other.typeId() == AssetMetadataMPx::id)
 	{
 		AssetMetadataMPx* otherData = (AssetMetadataMPx*)&other;
-		this->assetMetadata.setRawBuffer(otherData->assetMetadata.getRawBuffer());
+		assetMetadata = otherData->assetMetadata;
 	}
 	else
 	{

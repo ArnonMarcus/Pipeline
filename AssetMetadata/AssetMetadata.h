@@ -15,6 +15,7 @@ namespace Pipeline {
 	{
 		AssetMetadata();
 		~AssetMetadata();
+		AssetMetadata& operator=(const AssetMetadata& other);
 
 		// Setters
 		void setObjectType(const char* objectType);

@@ -20,10 +20,10 @@ namespace Pipeline {
 	{
 		for (uint8 i = 0; i < BUFFER_LENGTH; i++) _buffer[i] = 0;		
 		*_apiVersion = (uint8)API_VERSION;
-		//strcpy_s(_assetName, ASSET_NAME_LENGTH, "");
 	}
 
 	AssetMetadata::~AssetMetadata()	{ delete[] _buffer;	}
+	AssetMetadata& AssetMetadata::operator=(const AssetMetadata& other) { setRawBuffer(other._buffer); return *this; }
 
 	void AssetMetadata::setAssetMode(const AssetModes::Enum& assetMode)				{ *_assetMode = (uint8)assetMode; }
 	void AssetMetadata::setAssetType(const AssetTypes::Enum& assetType)				{ *_assetType = (uint8)assetType; }
@@ -85,7 +85,7 @@ namespace Pipeline {
 
 	uint8 AssetMetadata::getAPIversion() { return *_apiVersion; }
 	char* AssetMetadata::getRawBuffer() { return _buffer; }
-	void AssetMetadata::setRawBuffer(const char* buffer) { *_buffer = *buffer; };
+	void AssetMetadata::setRawBuffer(const char* buffer) { for (uint8 i = 0; i < BUFFER_LENGTH; i++) _buffer[i] = buffer[i]; };
 }
 
 

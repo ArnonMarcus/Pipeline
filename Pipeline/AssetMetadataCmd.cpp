@@ -22,7 +22,7 @@ using namespace Pipeline;
 
 //- Instantiate static fields
 /*static*/ MObject AssetMetadataCmd::_extensionAttribute;
-/*static*/ MObject AssetMetadataCmd::_extensionAttributeDefaultValue;
+///*static*/ MObject AssetMetadataCmd::_extensionAttributeDefaultValue;
 /*static*/ MString AssetMetadataCmd::_extensionAttributeFullName(kExtensionAttributeFullName);
 /*static*/ MString AssetMetadataCmd::_extensionAttributeBriefName(kExtensionAttributeShortName);
 /*static*/ MNodeClass AssetMetadataCmd::_extensionAttributeAffectedNodeClass(kExtensionAttributeAffectedNodeClassName);
@@ -31,16 +31,16 @@ using namespace Pipeline;
 {
 	MStatus status;
 
-	MFnPluginData fnData;
-	AssetMetadataCmd::_extensionAttributeDefaultValue = fnData.create(AssetMetadataMPx::id, &status);
-	CHECK_MSTATUS_AND_RETURN_IT(status);
+	//MFnPluginData fnData;
+	//AssetMetadataCmd::_extensionAttributeDefaultValue = fnData.create(AssetMetadataMPx::id, &status);
+	//CHECK_MSTATUS_AND_RETURN_IT(status);
 
 	MFnTypedAttribute fnAttr;
 	AssetMetadataCmd::_extensionAttribute = fnAttr.create(
 		AssetMetadataCmd::_extensionAttributeFullName,
 		AssetMetadataCmd::_extensionAttributeBriefName,
 		AssetMetadataMPx::id,
-		AssetMetadataCmd::_extensionAttributeDefaultValue, &status);
+		MObject::kNullObj, &status);
 	CHECK_MSTATUS_AND_RETURN_IT(status);
 
 	fnAttr.setHidden(1);
@@ -179,6 +179,7 @@ MStatus AssetMetadataCmd::redoIt()
 
 	MPlug plug;
 	MObject node;
+	MTypeId typeID;
 	MDataHandle dhData;
 	MFnPluginData fnData;
 	MFnDependencyNode fnNode;
@@ -199,32 +200,23 @@ MStatus AssetMetadataCmd::redoIt()
 		}
 
 		plug = fnNode.findPlug(kExtensionAttributeFullName, false, &status);					CHECK_MSTATUS_AND_RETURN_IT(status);
-		//dhData = plug.asMDataHandle(MDGContext::fsNormal, &status);								CHECK_MSTATUS_AND_RETURN_IT(status);
-		//if (dhData.typeId() != AssetMetadataMPx::id)
-		//{
-		//	MString msg = MStringResource::getString(kAttributeWrongType, status);
-		//	displayError(msg);
-		//	return MS::kFailure;
-		//}
+		dhData = plug.asMDataHandle(MDGContext::fsNormal, &status);								CHECK_MSTATUS_AND_RETURN_IT(status);
+		typeID = dhData.typeId();
+		if (typeID.id()) {
+			if (typeID != AssetMetadataMPx::id)
+			{
+				MString msg = MStringResource::getString(kAttributeWrongType, status);
+				displayError(msg);
+				return MS::kFailure;
+			}
 
-		//status = fnData.setObject(dhData.data());												CHECK_MSTATUS_AND_RETURN_IT(status);
-		//data = (AssetMetadataMPx*)fnData.constData(&status);									CHECK_MSTATUS_AND_RETURN_IT(status);
-
-		MObject sData;
-		status = plug.getValue(sData);
-
-		if (status != MS::kSuccess)
-		{
-			cerr << "error getting value off plug" << endl;
-			continue;
+			status = fnData.setObject(dhData.data());												CHECK_MSTATUS_AND_RETURN_IT(status);
+			data = (AssetMetadataMPx*)fnData.constData(&status);									CHECK_MSTATUS_AND_RETURN_IT(status);
 		}
-
-		status = fnData.setObject(sData);														CHECK_MSTATUS_AND_RETURN_IT(status);
-
-		//MFnPluginData pdFn(sData);
-
-		data = (AssetMetadataMPx*)fnData.constData(&status);									CHECK_MSTATUS_AND_RETURN_IT(status);
-
+		else
+		{
+			data = new AssetMetadataMPx();
+		}
 
 		if (_commandFlagsUsed & kEditMode)
 		{
