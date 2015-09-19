@@ -21,7 +21,7 @@ namespace Pipeline {
 
 		Enum getEnum(const char* name);
 		std::string getName(const Enum& value);
-		std::string getString(const uint64* flags);
+		std::string getString(const uint64& flags);
 	}
 }
 

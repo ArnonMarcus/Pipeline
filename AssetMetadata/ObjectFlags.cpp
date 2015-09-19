@@ -18,11 +18,11 @@ namespace Pipeline {
 		
 		Enum getEnum(const char* name) { return Enum(findStringArrayIndex(name, names, count)); }
 		std::string getName(const Enum& value) { return names[(uint8)value]; }
-		std::string getString(const uint64* flags)
+		std::string getString(const uint64& flags)
 		{
 			uint64 bit = 1;
 			std::string flagString;
-			for (int i = 1; i <= count; i++, bit <<= 1) if (*flags & bit)
+			for (int i = 1; i <= count; i++, bit <<= 1) if (flags & bit)
 			{
 				flagString.append(names[i]);
 				if (i < count) flagString.append(",");

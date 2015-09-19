@@ -25,14 +25,14 @@ namespace Pipeline {
 
 	AssetMetadata::~AssetMetadata()	{ delete[] _buffer;	}
 
-	void AssetMetadata::setAssetMode(const AssetModes::Enum& assetMode)				{ *_assetMode = static_cast<uint8>(assetMode); }
-	void AssetMetadata::setAssetType(const AssetTypes::Enum& assetType)				{ *_assetType = static_cast<uint8>(assetType); }
-	void AssetMetadata::setObjectType(const ObjectTypes::Enum& objectType)			{ *_objectType = static_cast<uint8>(objectType); }
-	void AssetMetadata::setObjectRigPart(const ObjectRigParts::Enum& objectRigPart) { *_objectRigPart = static_cast<uint8>(objectRigPart); }
-	void AssetMetadata::setObjectRigSide(const ObjectRigSides::Enum& objectSide)	{ *_objectRigSide = static_cast<uint8>(objectSide); }
-	void AssetMetadata::setObjectFlag(const ObjectFlags::Enum& objectFlag)			{ *_objectFlags |= static_cast<uint64>(objectFlag); }
+	void AssetMetadata::setAssetMode(const AssetModes::Enum& assetMode)				{ *_assetMode = (uint8)assetMode; }
+	void AssetMetadata::setAssetType(const AssetTypes::Enum& assetType)				{ *_assetType = (uint8)assetType; }
+	void AssetMetadata::setObjectType(const ObjectTypes::Enum& objectType)			{ *_objectType = (uint8)objectType; }
+	void AssetMetadata::setObjectRigPart(const ObjectRigParts::Enum& objectRigPart) { *_objectRigPart = (uint8)objectRigPart; }
+	void AssetMetadata::setObjectRigSide(const ObjectRigSides::Enum& objectSide)	{ *_objectRigSide = (uint8)objectSide; }
+	void AssetMetadata::setObjectFlag(const ObjectFlags::Enum& objectFlag)			{ *_objectFlags |= (uint64)objectFlag; }
 	void AssetMetadata::setObjectFlags(const uint64& objectFlags)					{ *_objectFlags |= objectFlags; }
-	void AssetMetadata::unsetObjectFlag(const ObjectFlags::Enum& objectFlag)		{ *_objectFlags &= ~static_cast<uint64>(objectFlag); }
+	void AssetMetadata::unsetObjectFlag(const ObjectFlags::Enum& objectFlag)		{ *_objectFlags &= ~(uint64)objectFlag; }
 	void AssetMetadata::unsetObjectFlags(const uint64& objectFlags)					{ *_objectFlags &= ~objectFlags; }
 	void AssetMetadata::clearObjectFlags()											{ *_objectFlags = 0; }
 	void AssetMetadata::setAssetModeVersion(const uint32& assetModeVersion)			{ *_assetModeVersion = assetModeVersion; }
@@ -73,9 +73,9 @@ namespace Pipeline {
 	std::string AssetMetadata::getObjectTypeString() { return ObjectTypes::getName((ObjectTypes::Enum)*_objectType); }
 	std::string AssetMetadata::getObjectRigPartString() { return ObjectRigParts::getName((ObjectRigParts::Enum)*_objectRigPart); }
 	std::string AssetMetadata::getObjectRigSideString() { return ObjectRigSides::getName((ObjectRigSides::Enum)*_objectRigSide); }
-	std::string AssetMetadata::getObjectFlagsAsString() { return ObjectFlags::getString(_objectFlags); }
+	std::string AssetMetadata::getObjectFlagsAsString() { return ObjectFlags::getString(*_objectFlags); }
 
-	bool AssetMetadata::isObjectFlagSet(ObjectFlags::Enum objectFlag) { return (*_objectFlags & static_cast<uint64>(objectFlag)) != 0; }
+	bool AssetMetadata::isObjectFlagSet(ObjectFlags::Enum objectFlag) { return (*_objectFlags & (uint64)objectFlag) != 0; }
 	bool AssetMetadata::setAssetName(const char* assetName)
 	{
 		strcpy_s(_assetName, ASSET_NAME_LENGTH, "");
