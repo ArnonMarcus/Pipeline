@@ -83,6 +83,7 @@ private:
 	std::queue<AssetMetadata> _oldAssetMetadata;
 
 	MStatus parseArguments(const MArgList& argList);
+	MStatus doCmd(bool undo);
 };
 
 #endif

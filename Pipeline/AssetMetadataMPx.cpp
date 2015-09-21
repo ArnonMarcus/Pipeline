@@ -44,7 +44,7 @@ MStatus AssetMetadataMPx::readASCII(const MArgList& args, unsigned& lastParsedEl
 		MString bufferStr;																											
 		status = args.get(lastParsedElement++, bufferStr);
 		CHECK_MSTATUS_AND_RETURN_IT(status);
-		assetMetadata.setRawBuffer(bufferStr.asChar());
+		assetMetadata->setRawBuffer(bufferStr.asChar());
 		return MS::kSuccess;
 	}
 	return MS::kFailure;
@@ -54,7 +54,7 @@ MStatus AssetMetadataMPx::writeASCII(ostream& out)
 {
 	MStatus status;
 
-	out << BUFFER_LENGTH << " " << assetMetadata.getRawBuffer();
+	out << BUFFER_LENGTH << " " << assetMetadata->getRawBuffer();
 	
 	return out.fail() ? MS::kFailure : MS::kSuccess;
 }
@@ -62,7 +62,7 @@ MStatus AssetMetadataMPx::writeASCII(ostream& out)
 MStatus AssetMetadataMPx::writeBinary(ostream& out)
 {
 	MStatus status;
-	out.write(assetMetadata.getRawBuffer(), BUFFER_SIZE);
+	out.write(assetMetadata->getRawBuffer(), BUFFER_SIZE);
 	return out.fail() ? MS::kFailure : MS::kSuccess;
 }
 
@@ -71,7 +71,7 @@ MStatus AssetMetadataMPx::readBinary(istream& in, unsigned length)
 	MStatus status;
 	if (length > 0)
 	{
-		in.read(assetMetadata.getRawBuffer(), BUFFER_SIZE);
+		in.read(assetMetadata->getRawBuffer(), BUFFER_SIZE);
 		return in.fail() ? MS::kFailure : MS::kSuccess;
 	}
 	

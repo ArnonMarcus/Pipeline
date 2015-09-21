@@ -19,8 +19,8 @@ using namespace Pipeline;
 class AssetMetadataMPx : public MPxData
 {
 public:
-	AssetMetadataMPx() {};
-	virtual ~AssetMetadataMPx() {};
+	AssetMetadataMPx() { assetMetadata = new AssetMetadata; };
+	virtual ~AssetMetadataMPx() { delete assetMetadata; };
 
 	virtual MStatus         readASCII(const MArgList&, unsigned& lastElement);
 	virtual MStatus         readBinary(istream& in, unsigned length);
@@ -36,7 +36,7 @@ public:
 	static const MTypeId    id;
 	static void*            creator();
 
-	AssetMetadata			assetMetadata;
+	AssetMetadata*			assetMetadata;
 };
 
 #endif;

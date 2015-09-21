@@ -160,21 +160,8 @@ MStatus AssetMetadataCmd::parseArguments(const MArgList& argList)
 	return MS::kSuccess;
 }
 
-MStatus AssetMetadataCmd::doIt(const MArgList& argList)
+MStatus AssetMetadataCmd::doCmd(bool undo)
 {
-	MStatus status = parseArguments(argList);
-	if (status != MS::kSuccess)
-	{
-		return status;
-	}
-
-	return redoIt();
-}
-
-MStatus AssetMetadataCmd::redoIt()
-{
-	clearResult();
-
 	MStatus status;
 
 	MPlug plug;
@@ -190,7 +177,7 @@ MStatus AssetMetadataCmd::redoIt()
 	{
 		status = iter.getDependNode(node);														CHECK_MSTATUS_AND_RETURN_IT(status);
 		status = fnNode.setObject(node);														CHECK_MSTATUS_AND_RETURN_IT(status);
-		
+
 		bool hasAttr = fnNode.hasAttribute(kExtensionAttributeFullName, &status);				CHECK_MSTATUS_AND_RETURN_IT(status);
 		if (!hasAttr)
 		{
@@ -202,7 +189,8 @@ MStatus AssetMetadataCmd::redoIt()
 		plug = fnNode.findPlug(kExtensionAttributeFullName, false, &status);					CHECK_MSTATUS_AND_RETURN_IT(status);
 		dhData = plug.asMDataHandle(MDGContext::fsNormal, &status);								CHECK_MSTATUS_AND_RETURN_IT(status);
 		typeID = dhData.typeId();
-		if (typeID.id()) {
+		if (typeID.id())
+		{
 			if (typeID != AssetMetadataMPx::id)
 			{
 				MString msg = MStringResource::getString(kAttributeWrongType, status);
@@ -218,81 +206,51 @@ MStatus AssetMetadataCmd::redoIt()
 			data = new AssetMetadataMPx();
 		}
 
+		AssetMetadata* assetMetadata = data->assetMetadata;
+
 		if (_commandFlagsUsed & kEditMode)
 		{
-			_oldAssetMetadata.push(data->assetMetadata);
+			if (undo)
+			{
+				*assetMetadata = _oldAssetMetadata.front();
+				_oldAssetMetadata.pop();
+			}
+			else
+			{
+				_oldAssetMetadata.push(*assetMetadata);
 
-			if (_commandFlagsUsed & kAssetName) data->assetMetadata.setAssetName(_newAssetMetadata.getAssetName().c_str());
-			if (_commandFlagsUsed & kAssetType) data->assetMetadata.setAssetType(_newAssetMetadata.getAssetType());
-			if (_commandFlagsUsed & kObjectType) data->assetMetadata.setObjectType(_newAssetMetadata.getObjectType());
-			if (_commandFlagsUsed & kObjectFlags) data->assetMetadata.setObjectFlags(_newAssetMetadata.getObjectFlags());
-			if (_commandFlagsUsed & kAssetMode) data->assetMetadata.setAssetMode(_newAssetMetadata.getAssetMode());
-			if (_commandFlagsUsed & kAssetModeVersion) data->assetMetadata.setAssetModeVersion(_newAssetMetadata.getAssetModeVersion());
-			if (_commandFlagsUsed & kAssetInstanceID) data->assetMetadata.setAssetInstanceID(_newAssetMetadata.getAssetInstanceID());
+				if (_commandFlagsUsed & kAssetName) assetMetadata->setAssetName(_newAssetMetadata.getAssetName().c_str());
+				if (_commandFlagsUsed & kAssetType) assetMetadata->setAssetType(_newAssetMetadata.getAssetType());
+				if (_commandFlagsUsed & kObjectType) assetMetadata->setObjectType(_newAssetMetadata.getObjectType());
+				if (_commandFlagsUsed & kObjectFlags) assetMetadata->setObjectFlags(_newAssetMetadata.getObjectFlags());
+				if (_commandFlagsUsed & kAssetMode) assetMetadata->setAssetMode(_newAssetMetadata.getAssetMode());
+				if (_commandFlagsUsed & kAssetModeVersion) assetMetadata->setAssetModeVersion(_newAssetMetadata.getAssetModeVersion());
+				if (_commandFlagsUsed & kAssetInstanceID) assetMetadata->setAssetInstanceID(_newAssetMetadata.getAssetInstanceID());
+			}
 
 			status = plug.setValue(data);														CHECK_MSTATUS_AND_RETURN_IT(status);
 		}
 		else
 		{
-			if (_commandFlagsUsed & kAssetName) appendToResult(data->assetMetadata.getAssetName().c_str());
-			if (_commandFlagsUsed & kAssetType) appendToResult(data->assetMetadata.getAssetTypeString().c_str());
-			if (_commandFlagsUsed & kObjectType) appendToResult(data->assetMetadata.getObjectTypeString().c_str());
-			if (_commandFlagsUsed & kObjectFlags) appendToResult(data->assetMetadata.getObjectFlagsAsString().c_str());
-			if (_commandFlagsUsed & kAssetMode) appendToResult(data->assetMetadata.getAssetModeString().c_str());
-			if (_commandFlagsUsed & kAssetModeVersion) appendToResult(data->assetMetadata.getAssetModeVersionString().c_str());
-			if (_commandFlagsUsed & kAssetInstanceID) appendToResult(data->assetMetadata.getAssetInstanceIDString().c_str());
+			clearResult();
+			if (_commandFlagsUsed & kAssetName) appendToResult(assetMetadata->getAssetName().c_str());
+			if (_commandFlagsUsed & kAssetType) appendToResult(assetMetadata->getAssetTypeString().c_str());
+			if (_commandFlagsUsed & kObjectType) appendToResult(assetMetadata->getObjectTypeString().c_str());
+			if (_commandFlagsUsed & kObjectFlags) appendToResult(assetMetadata->getObjectFlagsAsString().c_str());
+			if (_commandFlagsUsed & kAssetMode) appendToResult(assetMetadata->getAssetModeString().c_str());
+			if (_commandFlagsUsed & kAssetModeVersion) appendToResult(assetMetadata->getAssetModeVersionString().c_str());
+			if (_commandFlagsUsed & kAssetInstanceID) appendToResult(assetMetadata->getAssetInstanceIDString().c_str());
 		}
 	}
 
 	return MS::kSuccess;
 }
 
-MStatus AssetMetadataCmd::undoIt()
+MStatus AssetMetadataCmd::doIt(const MArgList& argList)
 {
-
-	MStatus status;
-
-	MPlug plug;
-	MObject node;
-	MDataHandle dhData;
-	MFnPluginData fnData;
-	MFnDependencyNode fnNode;
-	AssetMetadataMPx* data;
-	MItSelectionList iter(_currentSelectionList, MFn::kDagNode, &status);						CHECK_MSTATUS_AND_RETURN_IT(status);
-
-	for (; !iter.isDone(&status); iter.next())
-	{
-		status = iter.getDependNode(node);														CHECK_MSTATUS_AND_RETURN_IT(status);
-		status = fnNode.setObject(node);														CHECK_MSTATUS_AND_RETURN_IT(status);
-
-		bool hasAttr = fnNode.hasAttribute(kExtensionAttributeFullName, &status);				CHECK_MSTATUS_AND_RETURN_IT(status);
-		if (!hasAttr)
-		{
-			MString msg = MStringResource::getString(kAttributeNotFoundError, status);
-			displayError(msg);
-			return MS::kFailure;
-		}
-
-		plug = fnNode.findPlug(kExtensionAttributeFullName, false, &status);					CHECK_MSTATUS_AND_RETURN_IT(status);
-		dhData = plug.asMDataHandle(MDGContext::fsNormal, &status);								CHECK_MSTATUS_AND_RETURN_IT(status);
-		if (dhData.typeId() != AssetMetadataMPx::id)
-		{
-			MString msg = MStringResource::getString(kAttributeWrongType, status);
-			displayError(msg);
-			return MS::kFailure;
-		}
-
-		status = fnData.setObject(dhData.data());												CHECK_MSTATUS_AND_RETURN_IT(status);
-		data = (AssetMetadataMPx*)fnData.constData(&status);								CHECK_MSTATUS_AND_RETURN_IT(status);
-
-		if (_commandFlagsUsed & kEditMode)
-		{
-			data->assetMetadata.setRawBuffer(_oldAssetMetadata.front().getRawBuffer());
-			_oldAssetMetadata.pop();
-
-			status = plug.setValue(data);														CHECK_MSTATUS_AND_RETURN_IT(status);
-		}
-	}
-
-	return MS::kSuccess;
+	MStatus status = parseArguments(argList);													CHECK_MSTATUS_AND_RETURN_IT(status);
+	return redoIt();
 }
+
+MStatus AssetMetadataCmd::redoIt() { return doCmd(false); }
+MStatus AssetMetadataCmd::undoIt() { return doCmd(true); }
