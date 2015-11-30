@@ -143,16 +143,16 @@ MStatus AssetMetadataCmd::parseArguments(const MArgList& argList)
 		if (_commandFlagsUsed & kAssetName) _newAssetMetadata.setAssetName(argData.flagArgumentString(kS_AssetName, 0).asChar());
 		if (_commandFlagsUsed & kAssetType) _newAssetMetadata.setAssetType(AssetTypes::getEnum(argData.flagArgumentString(kS_AssetType, 0).asChar()));
 		if (_commandFlagsUsed & kAssetMode) _newAssetMetadata.setAssetMode(AssetModes::getEnum(argData.flagArgumentString(kS_AssetMode, 0).asChar()));
-		if (_commandFlagsUsed & kAssetModeVersion) _newAssetMetadata.setAssetModeVersion(argData.flagArgumentString(kS_AssetVersion, 0).asShort());
-		if (_commandFlagsUsed & kAssetInstanceID) _newAssetMetadata.setAssetInstanceID(argData.flagArgumentString(kS_AssetID, 0).asShort());
+		if (_commandFlagsUsed & kAssetModeVersion) _newAssetMetadata.setAssetVersion(argData.flagArgumentString(kS_AssetVersion, 0).asShort());
+		if (_commandFlagsUsed & kAssetInstanceID) _newAssetMetadata.setAssetID(argData.flagArgumentString(kS_AssetID, 0).asShort());
 		if (_commandFlagsUsed & kObjectType) _newAssetMetadata.setObjectType(ObjectTypes::getEnum(argData.flagArgumentString(kS_ObjectType, 0).asChar()));
 		if (_commandFlagsUsed & kObjectFlags)
 		{
-			_newAssetMetadata.clearObjectFlags();
+			_newAssetMetadata.clearAuxiliaryFlags();
 			unsigned int numFlags = argData.numberOfFlagUses(kS_ObjectFlag);
 			for (unsigned int i = 0; i < numFlags; i++)
 			{
-				_newAssetMetadata.setObjectFlag(ObjectFlags::getEnum(argData.flagArgumentString(kS_ObjectFlag, i).asChar()));
+				_newAssetMetadata.setAuxiliaryFlag(ObjectFlags::getEnum(argData.flagArgumentString(kS_ObjectFlag, i).asChar()));
 			}
 		}
 	}
@@ -222,10 +222,10 @@ MStatus AssetMetadataCmd::doCmd(bool undo)
 				if (_commandFlagsUsed & kAssetName) assetMetadata->setAssetName(_newAssetMetadata.getAssetName().c_str());
 				if (_commandFlagsUsed & kAssetType) assetMetadata->setAssetType(_newAssetMetadata.getAssetType());
 				if (_commandFlagsUsed & kObjectType) assetMetadata->setObjectType(_newAssetMetadata.getObjectType());
-				if (_commandFlagsUsed & kObjectFlags) assetMetadata->setObjectFlags(_newAssetMetadata.getObjectFlags());
+				if (_commandFlagsUsed & kObjectFlags) assetMetadata->setAuxiliaryFlags(_newAssetMetadata.getAuxiliaryFlags());
 				if (_commandFlagsUsed & kAssetMode) assetMetadata->setAssetMode(_newAssetMetadata.getAssetMode());
-				if (_commandFlagsUsed & kAssetModeVersion) assetMetadata->setAssetModeVersion(_newAssetMetadata.getAssetModeVersion());
-				if (_commandFlagsUsed & kAssetInstanceID) assetMetadata->setAssetInstanceID(_newAssetMetadata.getAssetInstanceID());
+				if (_commandFlagsUsed & kAssetModeVersion) assetMetadata->setAssetVersion(_newAssetMetadata.getAssetVersion());
+				if (_commandFlagsUsed & kAssetInstanceID) assetMetadata->setAssetID(_newAssetMetadata.getAssetID());
 			}
 
 			status = plug.setValue(data);														CHECK_MSTATUS_AND_RETURN_IT(status);
@@ -234,12 +234,12 @@ MStatus AssetMetadataCmd::doCmd(bool undo)
 		{
 			clearResult();
 			if (_commandFlagsUsed & kAssetName) appendToResult(assetMetadata->getAssetName().c_str());
-			if (_commandFlagsUsed & kAssetType) appendToResult(assetMetadata->getAssetTypeString().c_str());
-			if (_commandFlagsUsed & kObjectType) appendToResult(assetMetadata->getObjectTypeString().c_str());
-			if (_commandFlagsUsed & kObjectFlags) appendToResult(assetMetadata->getObjectFlagsAsString().c_str());
-			if (_commandFlagsUsed & kAssetMode) appendToResult(assetMetadata->getAssetModeString().c_str());
-			if (_commandFlagsUsed & kAssetModeVersion) appendToResult(assetMetadata->getAssetModeVersionString().c_str());
-			if (_commandFlagsUsed & kAssetInstanceID) appendToResult(assetMetadata->getAssetInstanceIDString().c_str());
+			if (_commandFlagsUsed & kAssetType) appendToResult(assetMetadata->getAssetType_toString().c_str());
+			if (_commandFlagsUsed & kObjectType) appendToResult(assetMetadata->getObjectType_toString().c_str());
+			if (_commandFlagsUsed & kObjectFlags) appendToResult(assetMetadata->getAuxiliaryFlags_toString().c_str());
+			if (_commandFlagsUsed & kAssetMode) appendToResult(assetMetadata->getAssetMode_toString().c_str());
+			if (_commandFlagsUsed & kAssetModeVersion) appendToResult(assetMetadata->getAssetVersion_toString().c_str());
+			if (_commandFlagsUsed & kAssetInstanceID) appendToResult(assetMetadata->getAssetID_toString().c_str());
 		}
 	}
 

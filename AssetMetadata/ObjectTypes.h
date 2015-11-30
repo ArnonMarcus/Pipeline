@@ -6,13 +6,20 @@
 
 namespace Pipeline {
 	namespace ObjectTypes {
+		using namespace Pipeline::bits::for_8bit;
+
 		enum Enum
 		{
-			kEmpty = 0x00,
-			kGeometry = 0x01,
-			kRig = 0x02,
-			kCamera = 0x03,
-			kLight = 0x04
+			kEmpty = bit_00,
+			kGeometry = bit_01,
+			kRig = bit_02,
+			kCamera = bit_03,
+			kLight = bit_04,
+
+			kCustomObjectType_05 = bit_05,
+			kCustomObjectType_06 = bit_06,
+			kCustomObjectType_07 = bit_07,
+			kCustomObjectType_08 = bit_08
 		};
 
 		Enum getEnum(const char* name);
