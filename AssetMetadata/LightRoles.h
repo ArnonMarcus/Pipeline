@@ -12,6 +12,7 @@ namespace Pipeline {
 		enum Enum
 		{
 			kEmpty = bit_00,
+
 			kKey = bit_01,
 			kFill = bit_02,
 			kRim = bit_03,
@@ -24,6 +25,8 @@ namespace Pipeline {
 		};
 
 		Enum getEnum(const char* name);
+		bool setName(const char* name, uint8* const value);
+		bool setNames(std::vector<std::string>& new_names, uint8* const value);
 		std::string getName(const Enum& value);
 		std::vector<std::string> getNames(const uint8& value);
 	}

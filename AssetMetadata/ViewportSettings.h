@@ -48,6 +48,8 @@ namespace Pipeline {
 		};
 
 		Enum getEnum(const char* name);
+		bool setName(const char* name, uint32* const value);
+		bool setNames(std::vector<std::string>& new_names, uint32* const value);
 		std::string getName(const Enum& value);
 		std::vector<std::string> getNames(const uint32& value);
 	}

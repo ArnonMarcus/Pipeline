@@ -42,6 +42,8 @@ namespace Pipeline {
 		// Outer-Back-Lower-Left [ 1111 1011 ] = kOuter | kBack | kLower | kLeft
 
 		Enum getEnum(const char* name);
+		bool setName(const char* name, uint8* const value);
+		bool setNames(std::vector<std::string>& new_names, uint8* const value);
 		std::string getName(const Enum& value);
 		std::vector<std::string> getNames(const uint8& value);
 	}

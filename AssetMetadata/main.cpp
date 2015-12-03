@@ -98,7 +98,7 @@ int main(int argc, char* argv[])
 		"Given Asset-Mode: " << assetModeName << "(" << assetMode << ")" <<
 		" is different from: " << assetModeName_stored << "(" << assetMode_stored << ")" << endl;
 
-	if (objectID != objectID_stored || objectTypeName.compare(objectTypeName_stored) != 0) cout <<
+	if (objectID != objectID_stored || objectIdName.compare(objectIdName_stored) != 0) cout <<
 		"Given Object-ID: " << objectIdName << "(" << objectID << ")" <<
 		" is different from: " << objectIdName_stored << "(" << objectID_stored << ")" << endl;
 

@@ -137,6 +137,35 @@ namespace Pipeline {
 		void setObjectID(const uint16& objectID) { *_objectID = objectID; }
 		void setProductionID(const uint64& productionID) { *_productionID = productionID; }
 
+		// String Setters
+		bool setObjectType(const std::string& objectType) { return ObjectTypes::setName(objectType.c_str(), _objectType); }
+		bool setObjectTypeFlag(const std::string& objectTypeFlag) { return ObjectTypeFlags::setName(objectTypeFlag.c_str(), _objectTypeFlags); }
+		bool setAssetType(const std::string& assetType) { return AssetTypes::setName(assetType.c_str(), _assetType); }
+		bool setAssetMode(const std::string& assetMode) { return AssetModes::setName(assetMode.c_str(), _assetMode); }
+		bool setPartSide(const std::string& partSide) { return PartSides::setName(partSide.c_str(), _partSides); }
+		bool setCameraRole(const std::string& cameraRole) { return CameraRoles::setName(cameraRole.c_str(), _cameraRoles); }
+		bool setLightRole(const std::string& lightRole) { return LightRoles::setName(lightRole.c_str(), _lightRoles); }
+		bool setBodyPart(const std::string& bodyPart) { return BodyParts::setName(bodyPart.c_str(), _bodyParts); }
+		bool setFacialPart(const std::string& facialPart) { return FacialParts::setName(facialPart.c_str(), _facialParts); }
+		bool setRenderSetting(const std::string& renderSetting) { return RenderSettings::setName(renderSetting.c_str(), _renderSettings); }
+		bool setViewportSetting(const std::string& viewportSetting) { return ViewportSettings::setName(viewportSetting.c_str(), _viewportSettings); }
+		bool setCustomPart(const std::string& customPart) { return CustomParts::setName(customPart.c_str(), _customParts); }
+		bool setCustomFlag(const std::string& customFlag) { return CustomFlags::setName(customFlag.c_str(), _customFlags); }
+		bool setPipelineFlag(const std::string& pipelineFlag) { return PipelineFlags::setName(pipelineFlag.c_str(), _pipelineFlags); }
+
+		// Multi-String Setters
+		bool setObjectTypeFlags(std::vector<std::string>& objectTypeFlags) { return ObjectTypeFlags::setNames(objectTypeFlags, _objectTypeFlags); }
+		bool setPartSides(std::vector<std::string>& partSides) { return PartSides::setNames(partSides, _partSides); }
+		bool setCameraRoles(std::vector<std::string>& cameraRoles) { return CameraRoles::setNames(cameraRoles, _cameraRoles); }
+		bool setLightRoles(std::vector<std::string>& lightRoles) { return LightRoles::setNames(lightRoles, _lightRoles); }
+		bool setBodyParts(std::vector<std::string>& bodyParts) { return BodyParts::setNames(bodyParts, _bodyParts); }
+		bool setFacialParts(std::vector<std::string>& facialParts) { return FacialParts::setNames(facialParts, _facialParts); }
+		bool setRenderSettings(std::vector<std::string>& renderSettings) { return RenderSettings::setNames(renderSettings, _renderSettings); }
+		bool setViewportSettings(std::vector<std::string>& viewportSettings) { return ViewportSettings::setNames(viewportSettings, _viewportSettings); }
+		bool setCustomParts(std::vector<std::string>& customParts) { return CustomParts::setNames(customParts, _customParts); }
+		bool setCustomFlags(std::vector<std::string>& customFlags) { return CustomFlags::setNames(customFlags, _customFlags); }
+		bool setPipelineFlags(std::vector<std::string>& pipelineFlags) { return PipelineFlags::setNames(pipelineFlags, _pipelineFlags); }
+
 		// Bit-Pattern Single-Bit Setters
 		void setObjectTypeFlag(const ObjectTypeFlags::Enum& objectTypeFlag) { *_objectTypeFlags |= (uint8)objectTypeFlag; }
 		void setPartSide(const PartSides::Enum& partSide) { *_partSides |= (uint8)partSide; }

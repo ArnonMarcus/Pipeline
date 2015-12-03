@@ -12,6 +12,7 @@ namespace Pipeline {
 		enum Enum
 		{
 			kEmpty = bit_00,
+
 			kBake = bit_01,
 			kCache = bit_02,
 			kSimulate = bit_03,
@@ -80,6 +81,8 @@ namespace Pipeline {
 		};
 
 		Enum getEnum(const char* name);
+		bool setName(const char* name, uint64* const value);
+		bool setNames(std::vector<std::string>& new_names, uint64* const value);
 		std::string getName(const Enum& value);
 		std::vector<std::string> getNames(const uint64& value);
 	}
