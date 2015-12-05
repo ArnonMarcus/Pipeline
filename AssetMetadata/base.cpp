@@ -11,17 +11,18 @@ namespace Pipeline {
 		return 0;
 	}
 
-	uint64 powerOf2(const uint8 value)
+	uint64 indexToValue(const uint8 value)
 	{
+		if (value == 0 || value == 1) return (uint64)value;
 		uint64 result = 1;
-		result = result << value;
+		result = result << (value - 1);
 		return result;
 	}
 
-	uint8 log2(const uint64 value)
+	uint8 valueToIndex(const uint64 value)
 	{
-		if (value == 0) return 0;
-		uint8 i = 0;
+		if (value == 0 || value == 1) return (uint8)value;
+		uint8 i = 1;
 		uint64 search = 1;
 		for (; i <= 64; i++)
 		{
@@ -30,5 +31,13 @@ namespace Pipeline {
 		}
 
 		return i;
+	}
+
+	std::string csv(std::vector<std::string> names)
+	{
+		std::string result;
+		for (std::vector<std::string>::iterator name = names.begin(); name != names.end(); ++name)
+			result += ((name + 1) == names.end()) ? *name : (*name + ",");
+		return result;
 	}
 }

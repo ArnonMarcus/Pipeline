@@ -1,8 +1,6 @@
 #ifndef VIEWPORT_SETTINGS
 #define VIEWPORT_SETTINGS
 
-#include <vector>
-#include <string>
 #include "base.h"
 
 namespace Pipeline {
@@ -44,7 +42,8 @@ namespace Pipeline {
 			kViewportSetting_28 = bit_28,
 			kViewportSetting_29 = bit_29,
 			kViewportSetting_30 = bit_30,
-			kViewportSetting_31 = bit_31
+			kViewportSetting_31 = bit_31,
+			kViewportSetting_32 = bit_32
 		};
 
 		Enum getEnum(const char* name);

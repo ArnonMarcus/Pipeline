@@ -1,7 +1,6 @@
 #ifndef ASSET_NAMES
 #define ASSET_NAMES
 
-#include <string>
 #include "base.h"
 
 namespace Pipeline {

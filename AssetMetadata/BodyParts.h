@@ -1,8 +1,6 @@
 #ifndef BODY_PARTS
 #define BODY_PARTS
 
-#include <vector>
-#include <string>
 #include "base.h"
 
 namespace Pipeline {

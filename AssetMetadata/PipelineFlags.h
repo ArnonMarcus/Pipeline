@@ -1,8 +1,6 @@
 #ifndef PIPELINE_FLAGS
 #define PIPELINE_FLAGS
 
-#include <vector>
-#include <string>
 #include "base.h"
 
 namespace Pipeline {

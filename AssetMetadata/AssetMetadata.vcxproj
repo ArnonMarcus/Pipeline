@@ -85,7 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="API_Versions.cpp" />
-    <ClCompile Include="AssetMetadata.cpp" />
     <ClCompile Include="AssetModes.cpp" />
     <ClCompile Include="AssetNames.cpp" />
     <ClCompile Include="AssetTypes.cpp" />

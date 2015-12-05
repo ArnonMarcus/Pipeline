@@ -1,8 +1,6 @@
 #ifndef CUSTOM_FLAGS
 #define CUSTOM_FLAGS
 
-#include <vector>
-#include <string>
 #include "base.h"
 
 namespace Pipeline {

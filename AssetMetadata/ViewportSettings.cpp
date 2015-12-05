@@ -9,7 +9,7 @@ namespace Pipeline {
 
 			"hidden",
 			"template",
-			"locked"
+			"locked",
 
 			"viewport_setting_04",
 			"viewport_setting_05",
@@ -42,13 +42,13 @@ namespace Pipeline {
 			"viewport_setting_32"
 		};
 
-		Enum getEnum(const char* name) { return Enum(static_cast<uint32>(powerOf2((indexOf(name, names, count))))); }
+		Enum getEnum(const char* name) { return Enum(static_cast<uint32>(indexToValue((indexOf(name, names, count))))); }
 		bool setName(const char* name, uint32* const value)
 		{
 			const char index = indexOf(name, names, count);
 			if (index)
 			{
-				*value |= static_cast<uint32>(powerOf2(index));
+				*value |= static_cast<uint32>(indexToValue(index));
 				return true;
 			}
 			return false;
@@ -66,16 +66,16 @@ namespace Pipeline {
 
 			uint32 new_values = 0;
 			std::vector<char>::iterator index = indices.begin();
-			for (; index != indices.end(); ++index) new_values |= static_cast<uint32>(powerOf2(*index));
+			for (; index != indices.end(); ++index) new_values |= static_cast<uint32>(indexToValue(*index));
 			*value |= new_values;
 			return true;
 		}
-		std::string getName(const Enum& value) { return names[log2(value)]; }
+		std::string getName(const Enum& value) { return names[valueToIndex(value)]; }
 		std::vector<std::string> getNames(const uint32& value)
 		{
 			std::vector<std::string> result;
 			uint32 bit = 1;
-			for (char i = 1; i <= count; i++, bit <<= 1) if (value & bit) result.push_back(names[log2(bit) + 1]);
+			for (char i = 1; i <= count; i++, bit <<= 1) if (value & bit) result.push_back(names[valueToIndex(bit)]);
 			return result;
 		}
 	};

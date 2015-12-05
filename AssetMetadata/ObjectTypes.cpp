@@ -3,27 +3,25 @@
 
 namespace Pipeline {
 	namespace ObjectTypes {
-		const char used = 4;
-		const char count = 8;
+		const char count = 4;
 		const char* names[count + 1] = {
 			"",
 
 			"geometry",
 			"rig",
 			"camera",
-			"light",
-
-			"object_type_05",
-			"object_type_06",
-			"object_type_07",
-			"object_type_08"
+			"light"
 		};
 
 		Enum getEnum(const char* name) { return Enum(indexOf(name, names, count)); }
 		bool setName(const char* name, uint8* const value)
 		{
 			char index = indexOf(name, names, count);
-			if (index) return true;
+			if (index)
+			{
+				*value = index;
+				return true;
+			}
 			return false;
 		}
 		std::string getName(const Enum& value) { return names[(uint8)value]; }

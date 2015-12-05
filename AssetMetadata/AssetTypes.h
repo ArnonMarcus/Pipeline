@@ -1,26 +1,20 @@
 #ifndef ASSET_TYPES
 #define ASSET_TYPES
 
-#include <string>
 #include "base.h"
 
 namespace Pipeline {
 	namespace AssetTypes {
-		using namespace Pipeline::bits::for_8bit;
-
 		enum Enum
 		{
-			kEmpty = bit_00,
+			kEmpty = 0x00,
 
-			kEnvironment = bit_01,
-			kEnvironmentProp = bit_02,
-			kProp = bit_03,
-			kCharacter = bit_04,
-			kVehicle = bit_05,
-			kEffect = bit_06,
-
-			kAssetType_07 = bit_07,
-			kAssetType_08 = bit_08
+			kEnvironment = 0x01,
+			kEnvironmentProp = 0x02,
+			kProp = 0x03,
+			kCharacter = 0x04,
+			kVehicle = 0x05,
+			kEffect = 0x06
 		};
 
 		Enum getEnum(const char* name);

@@ -1,8 +1,6 @@
 #ifndef FACIAL_PARTS
 #define FACIAL_PARTS
 
-#include <vector>
-#include <string>
 #include "base.h"
 
 namespace Pipeline {

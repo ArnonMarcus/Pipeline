@@ -1,26 +1,20 @@
 #ifndef ASSET_MODES
 #define ASSET_MODES
 
-#include <string>
 #include "base.h"
 
 namespace Pipeline {
 	namespace AssetModes {
-		using namespace Pipeline::bits::for_8bit;
-
 		enum Enum
 		{
-			kEmpty = bit_00,
+			kEmpty = 0x00,
 
-			kLabel = bit_01,
-			kCached = bit_02,
-			kBoundingBox = bit_03,
-			kProxy = bit_04,
-			kAnimationRig = bit_05,
-			kRender = bit_06,
-
-			kAssetMode_07 = bit_07,
-			kAssetMode_08 = bit_08
+			kLabel = 0x01,
+			kCached = 0x02,
+			kBoundingBox = 0x03,
+			kProxy = 0x04,
+			kAnimationRig = 0x05,
+			kRender = 0x06
 		};
 
 		Enum getEnum(const char* name);

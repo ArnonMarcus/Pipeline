@@ -23,11 +23,11 @@
 #define kAttributeWrongType     MStringResourceId   (kPluginId, "kAttributeWrongType",      "PipelineAssetData attribute holds a wrong dataType(!)")
 
 // All flags in both 'short' and 'long' form
-#define kL_AssetName	"-assetName"
-#define kS_AssetName	"-nam"
+//#define kL_AssetName	"-assetName"
+//#define kS_AssetName	"-nam"
 
 #define kL_AssetType	"-assetType"
-#define kS_AssetType	"-atp"
+#define kS_AssetType	"-at"
 
 #define kL_AssetMode	"-assetMode"
 #define kS_AssetMode	"-mod"
@@ -35,14 +35,58 @@
 #define kL_AssetVersion	"-assetVersion"
 #define kS_AssetVersion	"-ver"
 
+#define kL_ParentID		"-parentID"
+#define kS_ParentID		"-pnt"
+
+#define kL_ProductionID	"-productionID"
+#define kS_ProductionID	"-prd"
+
 #define kL_AssetID		"-assetID"
-#define kS_AssetID		"-aID"
+#define kS_AssetID		"-ast"
+
+#define kL_ObjectID		"-ObjectID"
+#define kS_ObjectID		"-obj"
 
 #define kL_ObjectType	"-objectType"
-#define	kS_ObjectType	"-otp"
+#define	kS_ObjectType	"-ot"
 
-#define kL_ObjectFlags	"-objectFlag"
-#define	kS_ObjectFlag	"-flg"
+#define kL_ObjectTypeFlags	"-objectTypeFlag"
+#define	kS_ObjectTypeFlags	"-otf"
+
+#define kL_LightRoles "-lightRoles"
+#define	kS_LightRoles "-lrl"
+
+#define kL_LightRoles "-lightRoles"
+#define	kS_LightRoles "-lrl"
+
+#define kL_CameraRoles "-cameraRoles"
+#define	kS_CameraRoles "-crl"
+
+#define kL_PartSides "-partSides"
+#define	kS_PartSides "-psd"
+
+#define kL_BodyParts "-bodyParts"
+#define	kS_BodyParts "-bpt"
+
+#define kL_FacialParts "-facialParts"
+#define	kS_FacialParts "-fpt"
+
+#define kL_RenderSettings "-renderSettings"
+#define	kS_RenderSettings "-rst"
+
+#define kL_ViewportSettings	"-viewportSettings"
+#define	kS_ViewportSettings "-vst"
+
+#define kL_CustomParts	"-customParts"
+#define	kS_CustomParts	"-cpt"
+
+#define kL_CustomFlags	"-customFlags"
+#define	kS_CustomFlags	"-cfg"
+
+#define kL_PipelineFlags "-pipelineFlags"
+#define	kS_PipelineFlags "-pfg"
+
+using namespace Pipeline::bits::for_32bit;
 
 class AssetMetadataCmd : public MPxCommand
 {
@@ -64,17 +108,29 @@ private:
 	static MString _extensionAttributeBriefName;
 	static MNodeClass _extensionAttributeAffectedNodeClass;
 
-	char _commandFlagsUsed;
+	uint32 _commandFlagsUsed;
 	enum _commandFlag
 	{
-		kEditMode			= 0x01,
-		kAssetName			= 0x02,
-		kAssetType			= 0x04,
-		kObjectType			= 0x08,
-		kObjectFlags		= 0x10,
-		kAssetMode			= 0x20,
-		kAssetModeVersion	= 0x40,
-		kAssetInstanceID	= 0x80
+		kEditMode = bit_01,
+		kAssetType = bit_02,
+		kAssetMode = bit_03,
+		kAssetVersion = bit_04,
+		kAssetID = bit_05,
+		kParentID = bit_06,
+		kProductionID = bit_07,
+		kObjectID = bit_08,
+		kObjectType = bit_09,
+		kObjectTypeFlags = bit_10,
+		kPartSides = bit_11,
+		kBodyParts = bit_12,
+		kFacialParts = bit_13,
+		kCameraRoles = bit_14,
+		kLightRoles = bit_15,
+		kRenderSettings = bit_16,
+		kViewportSettings = bit_17,
+		kCustomFlags = bit_18,
+		kCustomParts = bit_19,
+		kPipelineFlags = bit_20
 	};
 
 	MSelectionList _currentSelectionList;

@@ -16,28 +16,43 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\AssetMetadata\API_Versions.cpp" />
-    <ClCompile Include="..\AssetMetadata\AssetMetadata.cpp" />
     <ClCompile Include="..\AssetMetadata\AssetModes.cpp" />
     <ClCompile Include="..\AssetMetadata\AssetTypes.cpp" />
     <ClCompile Include="..\AssetMetadata\base.cpp" />
-    <ClCompile Include="..\AssetMetadata\ObjectFlags.cpp" />
-    <ClCompile Include="..\AssetMetadata\ObjectRigParts.cpp" />
-    <ClCompile Include="..\AssetMetadata\ObjectRigSides.cpp" />
     <ClCompile Include="..\AssetMetadata\ObjectTypes.cpp" />
+    <ClCompile Include="..\AssetMetadata\ObjectTypeFlags.cpp" />
+    <ClCompile Include="..\AssetMetadata\BodyParts.cpp" />
+    <ClCompile Include="..\AssetMetadata\FacialParts.cpp" />
+    <ClCompile Include="..\AssetMetadata\CameraRoles.cpp" />
+    <ClCompile Include="..\AssetMetadata\LightRoles.cpp" />
+    <ClCompile Include="..\AssetMetadata\PartSides.cpp" />
+    <ClCompile Include="..\AssetMetadata\PipelineFlags.cpp" />
+    <ClCompile Include="..\AssetMetadata\CustomFlags.cpp" />
+    <ClCompile Include="..\AssetMetadata\CustomParts.cpp" />
+    <ClCompile Include="..\AssetMetadata\RenderSettings.cpp" />
+    <ClCompile Include="..\AssetMetadata\ViewportSettings.cpp" />    
     <ClCompile Include="AssetMetadataCmd.cpp" />
     <ClCompile Include="AssetMetadataMPx.cpp" />
     <ClCompile Include="pluginMain.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\AssetMetadata\API_Versions.h" />
     <ClInclude Include="..\AssetMetadata\AssetMetadata.h" />
+    <ClInclude Include="..\AssetMetadata\API_Versions.h" />
     <ClInclude Include="..\AssetMetadata\AssetModes.h" />
     <ClInclude Include="..\AssetMetadata\AssetTypes.h" />
     <ClInclude Include="..\AssetMetadata\base.h" />
-    <ClInclude Include="..\AssetMetadata\ObjectFlags.h" />
-    <ClInclude Include="..\AssetMetadata\ObjectRigParts.h" />
-    <ClInclude Include="..\AssetMetadata\ObjectRigSides.h" />
     <ClInclude Include="..\AssetMetadata\ObjectTypes.h" />
+    <ClInclude Include="..\AssetMetadata\ObjectTypeFlags.h" />
+    <ClInclude Include="..\AssetMetadata\BodyParts.h" />
+    <ClInclude Include="..\AssetMetadata\FacialParts.h" />
+    <ClInclude Include="..\AssetMetadata\CameraRoles.h" />
+    <ClInclude Include="..\AssetMetadata\LightRoles.h" />
+    <ClInclude Include="..\AssetMetadata\PartSides.h" />
+    <ClInclude Include="..\AssetMetadata\PipelineFlags.h" />
+    <ClInclude Include="..\AssetMetadata\CustomFlags.h" />
+    <ClInclude Include="..\AssetMetadata\CustomParts.h" />
+    <ClInclude Include="..\AssetMetadata\RenderSettings.h" />
+    <ClInclude Include="..\AssetMetadata\ViewportSettings.h" />
     <ClInclude Include="AssetMetadataCmd.h" />
     <ClInclude Include="AssetMetadataMPx.h" />
   </ItemGroup>

@@ -1,8 +1,6 @@
 #ifndef CUSTOM_PARTS
 #define CUSTOM_PARTS
 
-#include <vector>
-#include <string>
 #include "base.h"
 
 namespace Pipeline {

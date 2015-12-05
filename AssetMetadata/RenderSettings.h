@@ -1,8 +1,6 @@
 #ifndef RENDER_SETTINGS
 #define RENDER_SETTINGS
 
-#include <vector>
-#include <string>
 #include "base.h"
 
 namespace Pipeline {
@@ -44,7 +42,8 @@ namespace Pipeline {
 			kRenderSetting_28 = bit_28,
 			kRenderSetting_29 = bit_29,
 			kRenderSetting_30 = bit_30,
-			kRenderSetting_31 = bit_31
+			kRenderSetting_31 = bit_31,
+			kRenderSetting_32 = bit_32
 		};
 
 		Enum getEnum(const char* name);

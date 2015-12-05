@@ -46,6 +46,9 @@ The data-block holds the following:
 
 */
 
+#include <vector>
+#include <string>
+
 namespace Pipeline {
 	namespace bits {
 		namespace for_8bit {
@@ -182,9 +185,10 @@ namespace Pipeline {
 		}
 	}
 
-	uint64 powerOf2(const uint8 value);
-	uint8 log2(const uint64 value);
+	uint64 indexToValue(const uint8 value);
+	uint8 valueToIndex(const uint64 value);
 	char indexOf(const char* str, const char* names[], const short& length);
+	std::string csv(std::vector<std::string> names);
 }
 
 #endif

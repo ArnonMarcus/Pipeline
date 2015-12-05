@@ -1,7 +1,6 @@
 #ifndef API_VERSIONS
 #define API_VERSIONS
 
-#include <string>
 #include "base.h"
 
 namespace Pipeline {

@@ -1,8 +1,6 @@
 #ifndef ASSET_METADATA
 #define ASSET_METADATA
 
-#include <string>
-#include "base.h"
 #include "API_Versions.h"
 #include "ObjectTypes.h"
 #include "ObjectTypeFlags.h"
@@ -92,11 +90,26 @@ namespace Pipeline {
 
 		// Int Getters
 		uint8 getAPIversion() { return *_apiVersion; }
+		uint8 getObjectTypeFlags() { return *_objectTypeFlags; }
+		uint8 getPartSides() { return *_partSides; }
+		uint8 getCameraRoles() { return *_cameraRoles; }
+		uint8 getLightRoles() { return *_lightRoles; }
+
 		uint16 getAssetVersion() { return *_assetVersion; }
 		uint16 getAssetID() { return *_assetID; }
 		uint16 getParentID() { return *_parentID; }
 		uint16 getObjectID() { return *_objectID; }
+
+		uint32 getBodyParts() { return *_bodyParts; }
+		uint32 getFacialParts() { return *_facialParts; }
+		uint32 getRenderSettings() { return *_renderSettings; }
+		uint32 getViewportSettings() { return *_viewportSettings; }
+
+		uint64 getCustomParts() { return *_customParts; }
+		uint64 getCustomFlags() { return *_customFlags; }
+		uint64 getPipelineFlags() { return *_pipelineFlags; }
 		uint64 getProductionID() { return *_productionID; }
+
 
 		// Enum Getters
 		ObjectTypes::Enum getObjectType() { return (ObjectTypes::Enum)(*_objectType); }
@@ -105,27 +118,27 @@ namespace Pipeline {
 
 
 		// String Getters
-		std::string getObjectType_toString() { return ObjectTypes::getName((ObjectTypes::Enum)*_objectType); }
-		std::string getAssetType_toString() { return AssetTypes::getName((AssetTypes::Enum)*_assetType); }
-		std::string getAssetMode_toString() { return AssetModes::getName((AssetModes::Enum)*_assetMode); }
-		std::string getAssetVersion_toString() { return std::to_string(*_assetVersion); }
-		std::string getAssetID_toString() { return std::to_string(*_assetID); }
-		std::string getObjectID_toString() { return std::to_string(*_objectID); }
-		std::string getParentID_toString() { return std::to_string(*_parentID); }
-		std::string getProductionID_toString() { return std::to_string(*_productionID); }
+		std::string getObjectTypeName() { return ObjectTypes::getName((ObjectTypes::Enum)*_objectType); }
+		std::string getAssetTypeName() { return AssetTypes::getName((AssetTypes::Enum)*_assetType); }
+		std::string getAssetModeName() { return AssetModes::getName((AssetModes::Enum)*_assetMode); }
+		std::string getAssetVersionName() { return std::to_string(*_assetVersion); }
+		std::string getAssetIDName() { return std::to_string(*_assetID); }
+		std::string getObjectIDName() { return std::to_string(*_objectID); }
+		std::string getParentIDName() { return std::to_string(*_parentID); }
+		std::string getProductionIDName() { return std::to_string(*_productionID); }
 
 		// Multiple String Getters
-		std::vector<std::string> getObjectTypeFlags_toString() { return ObjectTypeFlags::getNames(*_objectTypeFlags); }
-		std::vector<std::string> getPartSides_toString() { return PartSides::getNames(*_partSides); }
-		std::vector<std::string> getCameraRoles_toString() { return CameraRoles::getNames(*_cameraRoles); }
-		std::vector<std::string> getLightRoles_toString() { return LightRoles::getNames(*_lightRoles); }
-		std::vector<std::string> getBodyParts_toString() { return BodyParts::getNames(*_bodyParts); }
-		std::vector<std::string> getFacialParts_toString() { return FacialParts::getNames(*_facialParts); }
-		std::vector<std::string> getRenderSettings_toString() { return RenderSettings::getNames(*_renderSettings); }
-		std::vector<std::string> getViewportSettings_toString() { return ViewportSettings::getNames(*_viewportSettings); }
-		std::vector<std::string> getCustomParts_toString() { return CustomParts::getNames(*_customParts); }
-		std::vector<std::string> getCustomFlags_toString() { return CustomFlags::getNames(*_customFlags); }
-		std::vector<std::string> getPipelineFlags_toString() { return PipelineFlags::getNames(*_pipelineFlags); }
+		std::vector<std::string> getObjectTypeFlagNames() { return ObjectTypeFlags::getNames(*_objectTypeFlags); }
+		std::vector<std::string> getPartSideNames() { return PartSides::getNames(*_partSides); }
+		std::vector<std::string> getCameraRoleNames() { return CameraRoles::getNames(*_cameraRoles); }
+		std::vector<std::string> getLightRoleNames() { return LightRoles::getNames(*_lightRoles); }
+		std::vector<std::string> getBodyPartNames() { return BodyParts::getNames(*_bodyParts); }
+		std::vector<std::string> getFacialPartNames() { return FacialParts::getNames(*_facialParts); }
+		std::vector<std::string> getRenderSettingNames() { return RenderSettings::getNames(*_renderSettings); }
+		std::vector<std::string> getViewportSettingNames() { return ViewportSettings::getNames(*_viewportSettings); }
+		std::vector<std::string> getCustomPartNames() { return CustomParts::getNames(*_customParts); }
+		std::vector<std::string> getCustomFlagNames() { return CustomFlags::getNames(*_customFlags); }
+		std::vector<std::string> getPipelineFlagNames() { return PipelineFlags::getNames(*_pipelineFlags); }
 
 		// Setters
 		void setObjectType(const ObjectTypes::Enum& objectType) { *_objectType = (uint8)objectType; }

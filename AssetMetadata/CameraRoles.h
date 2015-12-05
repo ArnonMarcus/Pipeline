@@ -1,8 +1,6 @@
 #ifndef CAMERA_ROLES
 #define CAMERA_ROLES
 
-#include <vector>
-#include <string>
 #include "base.h"
 
 namespace Pipeline {

@@ -1,8 +1,6 @@
 #ifndef LIGHT_ROLES
 #define LIGHT_ROLES
 
-#include <vector>
-#include <string>
 #include "base.h"
 
 namespace Pipeline {

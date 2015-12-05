@@ -1,8 +1,6 @@
 #ifndef OBJECT_TYPE_FLAGS
 #define OBJECT_TYPE_FLAGS
 
-#include <vector>
-#include <string>
 #include "base.h"
 
 namespace Pipeline {

@@ -1,8 +1,6 @@
 #ifndef OBJECT_RIG_SIDES
 #define OBJECT_RIG_SIDES
 
-#include <vector>
-#include <string>
 #include "base.h"
 
 namespace Pipeline {
